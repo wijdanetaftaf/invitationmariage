@@ -1,895 +1,380 @@
 <!DOCTYPE html>
-
 <html lang="fr">
-
 <head>
-
 <meta charset="utf-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-
 <title>Maria &amp; Abderrahmane — Invitation de mariage</title>
-
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500&family=Bodoni+Moda:ital,wght@0,500;1,500&family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Amiri&display=swap" rel="stylesheet">
-
 <style>
-
 :root{--paper:#f7f0e3;--card:#fffdf9;--sage:#b9987a;--olive:#2e1a1d;--blush:#e8d5a8;--rose:#8a2c3e;--wheat:#c98f8a;
-
 --serif:'Cormorant Garamond',Georgia,serif;--script:'Pinyon Script','Snell Roundhand',cursive}
-
 *{box-sizing:border-box;margin:0}
-
 html{scroll-behavior:smooth}
-
 body{font-family:var(--serif);color:var(--olive);background:var(--paper);font-size:clamp(17px,2.2vw,20px);line-height:1.5;overflow-x:hidden}
-
 body:not(.open){overflow:hidden;height:100dvh}
-
 svg.art{display:block;width:100%;height:auto;overflow:visible}
 
-
-
 /* Portes d'entrée */
-
 .doors{position:fixed;inset:0;z-index:30;perspective:2000px;transition:visibility 0s 2s}
-
 .open .doors{visibility:hidden}
-
 .door{position:absolute;top:0;bottom:0;width:50.2%;overflow:hidden;transition:transform 1.9s cubic-bezier(.65,0,.25,1);
-
- background:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 2px,transparent 2px 5px),linear-gradient(160deg,#1f2438,#0b0d18)}
-
+ background:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 2px,transparent 2px 5px),linear-gradient(160deg,#1f2438,#0b0d18)}
 .door::before{content:"";position:absolute;inset:3vmin;border:1.5px solid rgba(195,165,102,.85);border-radius:2px;outline:1px solid rgba(195,165,102,.4);outline-offset:6px}
-
 .dl{left:0;transform-origin:left center;box-shadow:inset -14px 0 30px rgba(0,0,0,.18)}
-
 .dr{right:0;transform-origin:right center;box-shadow:inset 14px 0 30px rgba(0,0,0,.18)}
-
 .open .dl{transform:rotateY(-112deg)}.open .dr{transform:rotateY(112deg)}
-
 .door .art{position:absolute;bottom:3vmin;width:min(52vw,46vh);}
-
 .dl .art{left:4vmin}.dr .art{right:4vmin;transform:scaleX(-1)}
-
 .medal{position:absolute;left:50%;top:50%;translate:-50% -50%;z-index:2;width:min(76vw,52vh);aspect-ratio:1;border-radius:50%;border:0;cursor:pointer;
-
- background:radial-gradient(circle at 35% 30%,#fffdf6,#f1e7d0);color:var(--olive);font:inherit;display:grid;place-content:center;text-align:center;
-
- box-shadow:0 0 0 2.2vmin rgba(247,241,227,.5),0 0 0 2.6vmin #f7f1e3,0 18px 40px rgba(40,50,30,.35);transition:opacity .5s,scale .8s}
-
+ background:radial-gradient(circle at 35% 30%,#fffdf6,#f1e7d0);color:var(--olive);font:inherit;display:grid;place-content:center;text-align:center;
+ box-shadow:0 0 0 2.2vmin rgba(247,241,227,.5),0 0 0 2.6vmin #f7f1e3,0 18px 40px rgba(40,50,30,.35);transition:opacity .5s,scale .8s}
 .medal::before{content:"";position:absolute;inset:3.2vmin;border:1px solid var(--rose);border-radius:50%;opacity:.7}
-
 .open .medal{opacity:0;scale:.8;pointer-events:none}
-
 .medal b{font:400 clamp(34px,10vmin,64px)/1.05 var(--script)}
-
 .medal i{font:400 clamp(24px,6vmin,38px)/1 var(--script);color:var(--rose);display:block}
-
 .medal small{display:block;margin-top:2.4vmin;font-size:clamp(14px,2.4vmin,18px);letter-spacing:.22em;text-transform:uppercase;color:var(--rose)}
-
 .medal .bfi{width:clamp(34px,8vmin,54px);margin:0 auto 1.6vmin;animation:hover 2.4s ease-in-out infinite}
-
 @keyframes hover{50%{translate:0 -6px}}
-
 .medal:focus-visible{outline:3px solid var(--olive);outline-offset:6px}
 
-
-
 /* Papillons */
-
 .wings{transform-origin:30px 20px;animation:flap .28s ease-in-out infinite alternate}
-
 @keyframes flap{to{transform:scaleX(.22)}}
-
 .bf{position:fixed;left:50%;top:52%;width:clamp(34px,6vw,58px);z-index:40;opacity:0;pointer-events:none}
-
 .open .bf{animation:fly 8s var(--d) ease-in-out forwards}
-
 @keyframes fly{0%{opacity:0;transform:translate(0,0) scale(.5)}8%{opacity:1}35%{transform:translate(calc(var(--x)*.6),calc(var(--y)*.35)) rotate(var(--r)) scale(1)}68%{transform:translate(calc(var(--x)*-.25),calc(var(--y)*.7)) rotate(calc(var(--r)*-1.2)) scale(1.1)}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(.8)}}
 
-
-
 /* Page */
-
 .hero{min-height:100dvh;position:relative;display:grid;place-items:center;text-align:center;padding:9vh 6vw 22vh;overflow:hidden;
-
- background:radial-gradient(ellipse 60% 40% at 0 0,rgba(222,200,165,.5),transparent),radial-gradient(ellipse 55% 45% at 100% 8%,rgba(176,138,110,.18),transparent),var(--paper)}
-
+ background:radial-gradient(ellipse 60% 40% at 0 0,rgba(222,200,165,.5),transparent),radial-gradient(ellipse 55% 45% at 100% 8%,rgba(176,138,110,.18),transparent),var(--paper)}
 .hero .art{position:absolute;bottom:-2vh;width:clamp(150px,30vw,340px)}
-
 .hero .l{left:-2vw}.hero .r{right:-2vw;transform:scaleX(-1)}
-
 .bism{font-family:'Amiri',serif;font-size:clamp(22px,4vw,32px);color:var(--rose)}
-
 h1{font-weight:400;margin:1.5vh 0}
-
 .n{display:block;font:400 clamp(70px,15vw,170px)/1.05 var(--script);color:var(--olive)}
-
 .n.b{font-size:clamp(54px,11.5vw,140px)}
-
 .amp{display:flex;align-items:center;justify-content:center;gap:16px;font:400 clamp(34px,6vw,60px)/1 var(--script);color:var(--rose);margin:-.4em 0}
-
 .amp::before,.amp::after{content:"";width:clamp(40px,10vw,110px);height:1px;background:linear-gradient(90deg,transparent,var(--sage))}
-
 .amp::after{transform:scaleX(-1)}
-
 .lead{max-width:30ch;margin:2vh auto 0;font-style:italic;font-size:clamp(20px,3vw,27px)}
-
 .more{position:absolute;bottom:4vh;left:50%;translate:-50% 0;color:var(--olive);text-decoration:none;font-size:15px;letter-spacing:.14em;animation:hover 2.4s ease-in-out infinite}
 
-
-
 section.s{padding:11vh 6vw;text-align:center}
-
 h2{font:400 clamp(40px,7vw,68px)/1.1 var(--script);color:var(--rose);margin-bottom:5vh}
-
 .plan{background:linear-gradient(180deg,var(--paper),#efe6d0)}
-
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:34px;max-width:880px;margin:auto}
-
 .c{background:var(--card);border:1px solid #e6dcc2;border-radius:4px;padding:46px 26px 34px;position:relative;box-shadow:0 14px 30px rgba(90,80,50,.14);rotate:-1.2deg}
-
 .c:nth-child(3){rotate:1.2deg}
-
 .c::before{content:"";position:absolute;top:-13px;left:50%;width:110px;height:28px;translate:-50% 0;rotate:-3deg;background:rgba(195,165,102,.7);box-shadow:0 1px 2px rgba(0,0,0,.1)}
-
 .c:nth-child(3)::before{background:rgba(159,178,209,.7);rotate:3deg}
-
 .c h3{font:400 clamp(44px,7vw,58px)/1 var(--script);color:var(--olive)}
-
 .day{margin-top:10px;font-style:italic;color:var(--rose);font-size:1.1em}
-
 .date{font-weight:600;font-size:clamp(24px,4vw,30px);line-height:1.2}
-
 .time{display:inline-block;margin:10px 0 14px;padding:2px 18px;border-top:1px solid var(--sage);border-bottom:1px solid var(--sage);letter-spacing:.12em}
-
 .place{font-weight:600;font-size:1.15em}
-
 .go{display:inline-flex;gap:8px;align-items:center;margin-top:20px;background:var(--olive);color:var(--paper);text-decoration:none;font-weight:600;padding:11px 24px;border-radius:99px;transition:background .2s,translate .2s}
-
 .go:hover,.go:focus-visible{background:var(--rose);translate:0 -2px}
-
 .go:focus-visible{outline:2px solid var(--olive);outline-offset:3px}
-
 .count{display:flex;justify-content:center;gap:clamp(10px,3vw,28px);flex-wrap:wrap}
-
 .count div{width:clamp(70px,19vw,112px);aspect-ratio:1;border-radius:50%;display:grid;place-content:center;background:var(--card);border:1.5px solid var(--sage);outline:1px dashed var(--blush);outline-offset:5px}
-
 .count b{font:600 clamp(26px,6vw,42px)/1 var(--serif)}
-
 .count span{font-size:clamp(12px,2.4vw,15px);color:var(--rose);font-style:italic}
-
 footer{padding:9vh 6vw 12vh;text-align:center;background:var(--olive);color:var(--paper);position:relative;overflow:hidden}
-
 footer p{max-width:26ch;margin:0 auto 18px;font-style:italic;font-size:clamp(21px,3.4vw,28px)}
-
 footer b{font:400 clamp(40px,8vw,70px)/1 var(--script);color:var(--blush)}
 
-
-
 /* Apparition */
-
 .rv{opacity:0;translate:0 14px}
-
 .open .rv{opacity:1;translate:0;transition:opacity 1.2s calc(1.2s + var(--i)*.22s),translate 1.2s calc(1.2s + var(--i)*.22s)}
-
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01s!important;transition-delay:0s!important}}
 
-
-
 .hero::before,.hero::after{content:"";position:absolute;pointer-events:none;border:1px solid var(--sage)}
-
 .hero::before{inset:3vmin}.hero::after{inset:4.4vmin;opacity:.5}
-
 .mono{width:clamp(78px,15vw,104px);aspect-ratio:1;margin:0 auto 2vh;border-radius:50%;border:1px solid var(--sage);outline:1px solid var(--sage);outline-offset:5px;display:grid;place-content:center;font:400 clamp(30px,6vw,42px)/1 var(--script);color:var(--olive)}
-
 .mono i{font-size:.6em;color:var(--rose);margin:0 .1em}
-
 h2::after{content:"❖";display:block;font:18px var(--serif);color:var(--sage);margin-top:12px}
-
 .btns{display:flex;flex-direction:column;align-items:center;gap:2px}
-
 .go.alt{background:transparent;color:var(--olive);border:1.5px solid var(--olive)}
-
 .go.alt:hover,.go.alt:focus-visible{background:var(--olive);color:var(--paper)}
-
 .form{max-width:460px;margin:auto;display:grid;gap:16px;text-align:left}
-
 .form input,.form select{font:inherit;width:100%;padding:13px 16px;border:1px solid var(--sage);border-radius:4px;background:var(--card);color:var(--olive)}
-
 .form input:focus-visible,.form select:focus-visible{outline:2px solid var(--olive);outline-offset:2px}
-
 .form fieldset{border:1px solid var(--sage);border-radius:4px;padding:10px 16px;display:grid;gap:6px}
-
 .form legend{padding:0 8px;font-style:italic;color:var(--rose)}
-
 .form label{display:flex;gap:10px;align-items:center;cursor:pointer}
-
 .form input[type=checkbox]{width:20px;height:20px;accent-color:var(--olive)}
-
 .form .go{justify-content:center;border:0;font:600 1em var(--serif);cursor:pointer;margin:0}
-
 .form .err{color:#b9987a;min-height:1.4em;text-align:center;font-style:italic}
-
 .mus{position:fixed;top:max(14px,env(safe-area-inset-top));right:14px;z-index:35;width:44px;height:44px;border-radius:50%;border:1px solid var(--sage);background:rgba(255,253,248,.9);color:var(--olive);font-size:20px;cursor:pointer;opacity:0;pointer-events:none}
-
 .open .mus{opacity:1;pointer-events:auto;transition:opacity .6s 2.4s}
-
 .mus.off{opacity:.6;text-decoration:line-through}
-
 .mus:focus-visible{outline:2px solid var(--olive);outline-offset:3px}
 
-
-
 .art{color:#b9987a}.door .art{color:#9e4a56}
-
 .medal{background:radial-gradient(circle at 35% 30%,#fffdf9,#efe3c8);box-shadow:0 0 0 1.2vmin #0b0d18,0 0 0 1.6vmin #9e4a56,0 24px 50px rgba(0,0,0,.55)}
-
 h2::after{content:"";display:block;width:110px;height:1px;margin:16px auto 0;background:linear-gradient(90deg,transparent,var(--sage),transparent)}
-
 .c,.c:nth-child(3){rotate:0deg;border-radius:0;border:1px solid var(--sage);outline:1px solid rgba(176,138,110,.45);outline-offset:-9px;box-shadow:0 22px 44px rgba(20,22,35,.09);padding:52px 28px 38px}
-
 .c::before,.c:nth-child(3)::before{width:11px;height:11px;top:-6px;rotate:45deg;background:var(--paper);border:1px solid var(--sage);box-shadow:none}
-
 .day,.time{text-transform:uppercase;letter-spacing:.3em;font-size:.78em;font-style:normal;color:var(--rose)}
-
 .time{border-color:rgba(176,138,110,.6);padding:6px 20px}
-
 .go{border-radius:0;background:#2e1a1d;color:#f6ebdd;text-transform:uppercase;letter-spacing:.16em;font-size:.74em;padding:14px 28px}
-
 .go:hover,.go:focus-visible{background:var(--sage);color:#2e1a1d}
-
 .go.alt{background:transparent;color:var(--olive)}
-
 .go.alt:hover,.go.alt:focus-visible{background:#2e1a1d;color:#f6ebdd}
-
 .count div{background:transparent;border:1px solid var(--sage);outline:1px solid rgba(176,138,110,.4);outline-offset:5px}
-
 footer b{color:#9e4a56}
-
 .form input,.form select,.form fieldset{border-radius:0}
 
-
-
 /* Vibe luxe : noir, ivoire, or */
-
 .bf,.bfi{display:none}
-
 .door{background:repeating-linear-gradient(115deg,transparent 0 46px,rgba(158,74,86,.06) 46px 47px),radial-gradient(ellipse at 30% 15%,#1c1f30,#06070d 80%)}
-
 .medal{background:radial-gradient(circle at 50% 25%,#1c1f30,#06070d);color:#f6ebdd;box-shadow:0 0 0 1.2vmin #06070d,0 0 0 1.6vmin #9e4a56,0 0 70px rgba(158,74,86,.3),0 24px 50px rgba(0,0,0,.6)}
-
 .medal::before{border-color:rgba(158,74,86,.7);opacity:1}
-
 .medal b{color:#f6ebdd}.medal i,.medal small{color:#b9987a}
-
 .hero{box-shadow:inset 0 0 180px rgba(176,138,110,.2)}
-
 .n{background:linear-gradient(100deg,#5a1826 0%,#8a2c3e 30%,#d9a38f 50%,#8a2c3e 70%,#5a1826 100%) 100% 0/250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;padding:0 .1em}
-
 .open .n{animation:sheen 3.6s 2.6s ease-in-out forwards}
-
 @keyframes sheen{to{background-position:0 0}}
-
 .lead{font-style:normal;text-transform:uppercase;letter-spacing:.3em;font-size:.78em;line-height:2.1;max-width:34ch}
-
 h2{font:500 clamp(17px,3vw,24px)/1.4 var(--serif);letter-spacing:.34em;text-transform:uppercase;color:var(--rose)}
-
 .date,.count b{font-family:'Bodoni Moda',serif;font-weight:500}
-
 .plan{background:radial-gradient(ellipse at 50% 0,#1c1f30,#07080f 75%);color:#f1e6cc}
-
 .plan h2{color:#f6ebdd}
-
 .plan .c,.plan .c:nth-child(3){background:rgba(255,255,255,.025);border-color:rgba(158,74,86,.6);outline-color:rgba(158,74,86,.25);box-shadow:0 24px 50px rgba(0,0,0,.5)}
-
 .plan .c::before,.plan .c:nth-child(3)::before{background:#07080f;border-color:#9e4a56}
-
 .plan .c h3{font:italic 500 clamp(32px,6vw,44px)/1.1 'Bodoni Moda',serif;color:#f6ebdd}
-
 .plan .date{color:#f6edd8;font-size:clamp(19px,3.2vw,25px);letter-spacing:.05em}
-
 .plan .place{text-transform:uppercase;letter-spacing:.2em;font-size:.82em;color:#f1e6cc}
-
 .plan .day,.plan .time{color:#9e4a56;border-color:rgba(158,74,86,.5)}
-
 .plan .go{background:linear-gradient(135deg,#f6ebdd,#b9987a);color:#07080f}
-
 .plan .go:hover,.plan .go:focus-visible{background:#f6edd8}
-
 .plan .go.alt{background:transparent;color:#f6ebdd;border:1px solid #9e4a56}
-
 .plan .go.alt:hover,.plan .go.alt:focus-visible{background:#f6ebdd;color:#07080f}
-
 footer{background:radial-gradient(ellipse at 50% 0,#1c1f30,#06070d 80%)}
-
 footer p{font-style:normal;text-transform:uppercase;letter-spacing:.28em;font-size:.82em;line-height:2.1}
-
 .gl{position:fixed;z-index:38;width:3px;height:3px;border-radius:50%;background:#f6ebdd;box-shadow:0 0 8px 2px rgba(240,219,163,.8);opacity:0;pointer-events:none;animation:glint var(--t) var(--d) ease-out forwards}
-
 @keyframes glint{0%{opacity:0;transform:translateY(0) scale(.4)}20%{opacity:1}100%{opacity:0;transform:translateY(var(--y)) scale(1)}}
 
-
-
 /* Version lumineuse : ivoire, champagne, or */
-
 .door{background:repeating-linear-gradient(115deg,transparent 0 46px,rgba(176,138,110,.09) 46px 47px),radial-gradient(ellipse at 30% 15%,#fbf5ea,#e6d6bc 90%)}
-
 .dl{box-shadow:inset -14px 0 30px rgba(90,40,45,.22)}.dr{box-shadow:inset 14px 0 30px rgba(90,40,45,.22)}
-
 .door .art{color:#b9987a}
-
 .medal{background:radial-gradient(circle at 35% 30%,#fffdf9,#f6ecdc);color:#2e1a1d;box-shadow:0 0 0 1.2vmin #f3e8d6,0 0 0 1.6vmin #b9987a,0 24px 50px rgba(90,40,45,.4)}
-
 .medal::before{border-color:rgba(176,138,110,.8)}
-
 .medal b{color:#6b1f2f}.medal i,.medal small{color:#b9987a}
-
 .hero{background:radial-gradient(ellipse 60% 40% at 0 0,rgba(222,200,165,.6),transparent),radial-gradient(ellipse 55% 45% at 100% 10%,rgba(236,200,190,.5),transparent),radial-gradient(ellipse 50% 40% at 50% 100%,rgba(222,200,165,.45),transparent),#f8f1e4;box-shadow:inset 0 0 140px rgba(176,138,110,.14)}
-
 .plan{background:linear-gradient(180deg,#f8f1e4,#efe3cd);color:#2e1a1d}
-
 .plan h2{color:var(--rose)}
-
 .plan .c,.plan .c:nth-child(3){background:#fffdf9;border-color:var(--sage);outline-color:rgba(176,138,110,.45);box-shadow:0 22px 44px rgba(90,40,45,.14)}
-
 .plan .c::before,.plan .c:nth-child(3)::before{background:#f8f1e4;border-color:var(--sage)}
-
 .plan .c h3{color:#6b1f2f}
-
 .plan .date{color:#2e1a1d}.plan .place{color:#2e1a1d}
-
 .plan .day,.plan .time{color:var(--rose);border-color:rgba(176,138,110,.6)}
-
 .plan .go{background:linear-gradient(135deg,#8a2c3e,#5a1826);color:#f6ebdd}
-
 .plan .go:hover,.plan .go:focus-visible{background:#2e1a1d;color:#f6ebdd}
-
 .plan .go.alt{background:transparent;color:#6b1f2f;border:1px solid #8a2c3e}
-
 .plan .go.alt:hover,.plan .go.alt:focus-visible{background:#8a2c3e;color:#fffdf9}
-
 footer{background:linear-gradient(180deg,#efe3cd,#dfcaa6);color:#2e1a1d}
-
 footer b{color:#6b1f2f}
-
 .gl{background:#c98f8a;box-shadow:0 0 8px 2px rgba(158,74,86,.75)}
 
-
-
 /* Lisibilité : texte net, titres Bodoni */
-
 body{font-family:'Jost',system-ui,sans-serif;font-size:clamp(16px,2vw,18px);line-height:1.65;color:#2e1a1d}
-
 #bq use[href="#bl"]{color:#9e4a56}
-
 .lead{font-family:'Jost',sans-serif;font-style:normal;text-transform:none;letter-spacing:.02em;font-size:clamp(17px,2.6vw,21px);line-height:1.7;max-width:30ch;color:#2e1a1d}
-
 .day,.time,.plan .day,.plan .time{font-family:'Jost',sans-serif;font-weight:500;letter-spacing:.18em;font-size:14px}
-
 .plan .place{font-family:'Jost',sans-serif;font-weight:500;letter-spacing:.1em;font-size:16px}
-
 .go{font-family:'Jost',sans-serif;font-weight:500;letter-spacing:.12em;font-size:13.5px}
-
 .count span{font-family:'Jost',sans-serif;font-style:normal;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase}
-
 .medal small{font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.2em}
-
 footer p{font-family:'Jost',sans-serif;text-transform:none;letter-spacing:.02em;font-size:clamp(18px,2.8vw,22px);line-height:1.7;max-width:30ch}
-
 h2,.plan h2{font:italic 500 clamp(32px,6vw,50px)/1.15 'Bodoni Moda',serif;letter-spacing:.01em;text-transform:none;color:#8a2c3e}
 
-
-
 /* Animation « Nos deux jours de fête » */
-
 .plan h2{opacity:0;letter-spacing:.22em;transition:opacity 1.2s,letter-spacing 1.8s cubic-bezier(.2,.8,.2,1)}
-
 .plan.in h2{opacity:1;letter-spacing:.01em}
-
 .cards{perspective:1500px}
-
 .plan .c{opacity:0;transform:translateX(-80px) rotateY(30deg);--b:1s}
-
 .plan .c:nth-child(3){transform:translateX(80px) rotateY(-30deg);--b:1.35s}
-
 .plan.in .c{opacity:1;transform:none;transition:opacity 1.2s .3s,transform 1.5s cubic-bezier(.2,.8,.2,1) .3s}
-
 .plan.in .c:nth-child(3){transition-delay:.6s}
-
 .plan .c>*{opacity:0;transform:translateY(16px)}
-
 .plan.in .c>*{opacity:1;transform:none;transition:opacity .8s,transform .8s;transition-delay:calc(var(--b) + var(--k)*.15s)}
-
 .c>:nth-child(1){--k:0}.c>:nth-child(2){--k:1}.c>:nth-child(3){--k:2}.c>:nth-child(4){--k:3}.c>:nth-child(5){--k:4}.c>:nth-child(6){--k:5}.c>:nth-child(7){--k:6}
-
 .plan .c{padding-top:34px}
-
 .vn{display:block;width:130px;height:34px;margin:0 auto 4px;color:#9e4a56;overflow:visible}
-
 .vn path{fill:none;stroke:#b9987a;stroke-width:1.3;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.8s ease-in-out calc(var(--b) + .1s)}
-
 .plan.in .vn path{stroke-dashoffset:0}
-
 .vn use{transform:scale(0);transform-box:view-box;transform-origin:65px 17px;transition:transform 1s cubic-bezier(.3,1.7,.5,1) calc(var(--b) + 1.2s)}
-
 .plan.in .vn use{transform:scale(1)}
-
 .plan .c::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.65) 50%,transparent 65%);transform:translateX(-120%);pointer-events:none}
-
 .plan.done .c{transition:transform .5s,box-shadow .5s}
-
 .plan.done .c:hover{transform:translateY(-8px);box-shadow:0 30px 50px rgba(90,40,45,.22)}
-
 .plan.done .c:hover::after{transform:translateX(120%);transition:transform 1.1s}
-
 .plan.in .c::after{animation:gloss 1.6s calc(var(--b) + 2s) ease-in-out 1}
-
 @keyframes gloss{to{transform:translateX(120%)}}
-
 @media (prefers-reduced-motion:reduce){.plan h2,.plan .c,.plan .c>*{opacity:1!important;transform:none!important;letter-spacing:.01em}.vn path{stroke-dashoffset:0}.vn use{transform:none}}
 
-
-
 /* ===== Version finale : inspirée de l'invitation, beige et bordeaux ===== */
-
 .hero::before,.hero::after{display:none}
-
 .hero>div{position:relative;z-index:1}
-
 .cv{position:absolute;top:0;width:clamp(180px,40vw,400px);height:auto;pointer-events:none}
-
 .cv.l{left:0}.cv.r{right:0;transform:scaleX(-1)}
-
 .bism{color:#2e1a1d}
-
 .amp{color:#b9987a}
-
 .lead{text-transform:uppercase;letter-spacing:.14em;font-weight:500;font-size:clamp(14px,2.5vw,19px);line-height:1.9;max-width:36ch;margin-top:3vh}
-
 .cards{grid-template-columns:1fr auto 1fr;max-width:940px;gap:clamp(12px,4vw,56px);align-items:stretch}
-
 .plan .c,.plan .c:nth-child(3){background:none;border:0;outline:0;box-shadow:none;padding:0;border-radius:0}
-
 .plan .c::before,.plan .c:nth-child(3)::before{display:none}
-
 .plan .c h3{display:flex;align-items:center;justify-content:center;gap:10px;font:600 clamp(20px,3.8vw,30px)/1 'Cormorant Garamond',serif;font-style:normal;letter-spacing:.14em;text-transform:uppercase;color:#6b1f2f}
-
 .plan .c h3::before,.plan .c h3::after{content:"";flex:0 1 28px;height:1px;background:#b9987a}
-
 .plan .day{margin-top:14px;text-transform:uppercase}
-
 .plan .date{text-transform:uppercase;font-size:clamp(16px,2.9vw,23px);letter-spacing:.06em;white-space:normal;line-height:1.3;margin:4px 0 8px}
-
 .plan .dn{font-size:1.65em;color:#6b1f2f}
-
 .plan .time{border:0;display:flex;align-items:center;justify-content:center;gap:10px;max-width:250px;margin:6px auto 16px;padding:0}
-
 .plan .time::before,.plan .time::after{content:"";flex:1;height:1px;background:#b9987a}
-
 .plan .place{border-top:1px dotted #b9987a;padding-top:16px;margin:0 auto;max-width:300px;text-transform:uppercase}
-
 .sep{position:relative;width:1px;min-height:260px;background:linear-gradient(#b9987a,#b9987a) top/1px calc(50% - 24px) no-repeat,linear-gradient(#b9987a,#b9987a) bottom/1px calc(50% - 24px) no-repeat;transform:scaleY(0);transition:transform 1.5s .5s cubic-bezier(.2,.8,.2,1)}
-
 .plan.in .sep{transform:none}
-
 .sep span{position:absolute;top:50%;left:50%;translate:-50% -50%;color:#b3243a;font-size:26px;line-height:1;opacity:0;transition:opacity 1s 1.8s}
-
 .plan.in .sep span{opacity:1;animation:beat 2.2s 3s ease-in-out infinite}
-
 @keyframes beat{50%{scale:1.2}}
-
 footer p{text-transform:uppercase;letter-spacing:.14em;font-weight:500;font-size:clamp(14px,2.4vw,17px);line-height:1.9;max-width:34ch}
-
 @media (max-width:600px){.go{padding:12px 12px;font-size:12px;letter-spacing:.06em}.plan .c h3::before,.plan .c h3::after{flex-basis:10px}.plan .place{font-size:14px}}
 
-
-
 /* ===== Version épurée : fond blanc, sans fleurs, couleurs de l'invitation ===== */
-
 :root{--paper:#fff;--card:#fff;--ink:#2a1c1b;--taupe:#a89a92;--gold:#b9a08a;--heart:#c8242b;--olive:#2a1c1b;--rose:#2a1c1b;--sage:#a89a92}
-
 body{background:#fff;color:var(--ink);font-family:'Cormorant Garamond',Georgia,serif;font-weight:500}
-
 .doors .door{background:#fff;box-shadow:none}
-
 .door::before{inset:3vmin;border:1px solid var(--taupe);outline:1px solid rgba(168,154,146,.4);outline-offset:6px}
-
 .dl{box-shadow:inset -12px 0 24px rgba(0,0,0,.05)}.dr{box-shadow:inset 12px 0 24px rgba(0,0,0,.05)}
-
 .medal{background:#fff;color:var(--ink);box-shadow:0 0 0 1.2vmin #fff,0 0 0 1.6vmin var(--taupe),0 18px 40px rgba(0,0,0,.15)}
-
 .medal::before{border-color:var(--taupe)}
-
 .medal b{color:var(--ink)}.medal i{color:var(--gold)}.medal small{color:var(--ink);font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:.2em}
-
 .hero{background:#fff;box-shadow:none;padding:9vh 6vw 16vh}
-
 .bism{color:var(--ink)}
-
 .n,.open .n{background:none;-webkit-background-clip:initial;background-clip:initial;color:var(--ink);animation:none;padding:0}
-
 .amp{color:var(--gold)}
-
 .amp::before,.amp::after{background:linear-gradient(90deg,transparent,var(--taupe))}
-
 .lead{font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--ink);text-transform:uppercase;letter-spacing:.14em}
-
 .more{color:var(--taupe);font-family:'Cormorant Garamond',serif;font-weight:600}
-
 .plan,footer,section.s{background:#fff;color:var(--ink)}
-
 h2,.plan h2{color:var(--ink);font:500 clamp(28px,5vw,42px)/1.15 'Cormorant Garamond',serif;font-style:italic;letter-spacing:.02em}
-
 h2::after{background:linear-gradient(90deg,transparent,var(--taupe),transparent)}
-
 .plan .c h3{color:var(--ink);font-weight:600;letter-spacing:.14em}
-
 .plan .c h3::before,.plan .c h3::after{background:var(--taupe);flex:0 1 34px}
-
 .plan .c .day{position:relative;padding-top:14px;margin-top:12px;color:var(--ink);font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:.2em}
-
 .plan .c .day::before{content:"";position:absolute;top:0;left:50%;translate:-50% 0;width:130px;height:1px;background:var(--taupe)}
-
 .plan .date{color:var(--ink);font-family:'Cormorant Garamond',serif;font-weight:600}
-
 .plan .dn{color:var(--ink);font-size:1.7em}
-
 .plan .time{color:var(--ink);font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:.12em}
-
 .plan .time::before,.plan .time::after{background:var(--taupe)}
-
 .plan .place{color:var(--ink);font-family:'Cormorant Garamond',serif;font-weight:600;border-top:1px dotted var(--taupe);letter-spacing:.14em}
-
 .sep{background:linear-gradient(var(--taupe),var(--taupe)) top/1px calc(50% - 22px) no-repeat,linear-gradient(var(--taupe),var(--taupe)) bottom/1px calc(50% - 22px) no-repeat}
-
 .sep span{color:var(--heart)}
-
 .go,.plan .go{background:transparent;color:var(--ink);border:1px solid var(--taupe);font-family:'Cormorant Garamond',serif;font-weight:700}
-
 .go:hover,.go:focus-visible,.plan .go:hover,.plan .go:focus-visible{background:var(--ink);color:#fff;border-color:var(--ink)}
-
 .count div{background:#fff;border:1px solid var(--taupe);outline:1px solid rgba(168,154,146,.4)}
-
 .count b{font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--ink)}
-
 .count span{color:var(--taupe);font-family:'Cormorant Garamond',serif;font-weight:600}
-
 footer{border-top:0;position:relative}
-
 footer::before{content:"";display:block;width:min(260px,60%);height:1px;margin:0 auto 5vh;background:linear-gradient(90deg,transparent,var(--taupe),transparent)}
-
 footer p{font-family:'Cormorant Garamond',serif;font-weight:600;color:var(--ink)}
-
 footer b{color:var(--ink)}
-
 .mus{background:#fff;border-color:var(--taupe);color:var(--ink)}
-
 .gl{background:var(--gold);box-shadow:0 0 8px 2px rgba(185,160,138,.7)}
 
-
-
 .orn{position:absolute;width:clamp(210px,50vw,480px);height:auto;pointer-events:none;overflow:visible;opacity:.95}
-
 .orn.tl{top:0;left:0}.orn.tr{top:0;right:0;transform:scaleX(-1)}
-
 .orn.bl{bottom:0;left:0;transform:scaleY(-1)}.orn.br{bottom:0;right:0;transform:scale(-1,-1)}
-
-
-/* ===== Calendrier ===== */
-.btns{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:9px;
-  margin-top:18px;
-}
-.calendar-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:42px;
-  padding:10px 15px;
-  border:1px solid var(--taupe);
-  background:#fff;
-  color:var(--ink);
-  text-decoration:none;
-  font-family:'Cormorant Garamond',serif;
-  font-weight:700;
-  font-size:13px;
-  letter-spacing:.06em;
-  cursor:pointer;
-  transition:.2s ease;
-}
-.calendar-btn:hover,
-.calendar-btn:focus-visible{
-  background:var(--ink);
-  color:#fff;
-  border-color:var(--ink);
-}
-@media(max-width:600px){
-  .btns{gap:8px}
-  .calendar-btn{
-    width:min(100%,220px);
-    font-size:12px;
-    padding:9px 12px;
-  }
-
-  /* Empêche les chiffres/labels du compte à rebours de sortir des cercles */
-  .count{
-    width:100%;
-    max-width:360px;
-    margin-inline:auto;
-    gap:10px;
-  }
-  .count div{
-    width:clamp(64px,20vw,82px);
-    min-width:0;
-    outline-offset:3px;
-    padding:7px 3px;
-    overflow:hidden;
-  }
-  .count b{
-    display:block;
-    width:100%;
-    font-size:clamp(21px,7vw,30px);
-    line-height:1;
-    white-space:nowrap;
-  }
-  .count span{
-    display:block;
-    width:100%;
-    font-size:clamp(9px,2.6vw,12px);
-    line-height:1.15;
-    letter-spacing:.05em;
-    white-space:nowrap;
-  }
-}
-@media(max-width:360px){
-  .count{gap:7px}
-  .count div{width:62px;height:62px}
-  .count b{font-size:21px}
-  .count span{font-size:9px;letter-spacing:.02em}
-}
-
 </style>
-
 </head>
-
 <body>
-
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="orn" viewBox="0 0 400 220"><g fill="#fff" stroke="#8d7d76" stroke-width="1.15" stroke-linecap="round" stroke-linejoin="round"><path d="M-10 38C120 92 210 10 330 62" fill="none"/><path transform="translate(13.0 46.3) rotate(65.1)" d="M0.0 -0.0 L1.5 -1.2 L3.0 -2.2 L4.6 -3.6 L6.1 -5.2 L7.6 -6.9 L9.1 -8.4 L10.6 -9.3 L12.1 -9.6 L13.7 -9.2 L15.2 -8.3 L16.7 -7.2 L18.2 -6.3 L19.7 -5.8 L21.2 -6.2 L22.8 -7.3 L24.3 -9.0 L25.8 -11.0 L27.3 -12.9 L28.8 -14.2 L30.3 -14.7 L31.9 -14.2 L33.4 -12.9 L34.9 -11.0 L36.4 -9.0 L37.9 -7.3 L39.5 -6.2 L41.0 -5.8 L42.5 -6.3 L44.0 -7.2 L45.5 -8.3 L47.0 -9.2 L48.6 -9.6 L50.1 -9.3 L51.6 -8.4 L53.1 -6.9 L54.6 -5.2 L56.1 -3.6 L57.7 -2.2 L59.2 -1.2 L60.7 -0.0 L60.7 0.0 L59.2 1.2 L57.7 2.2 L56.1 3.6 L54.6 5.2 L53.1 6.9 L51.6 8.4 L50.1 9.3 L48.6 9.6 L47.0 9.2 L45.5 8.3 L44.0 7.2 L42.5 6.3 L41.0 5.8 L39.5 6.2 L37.9 7.3 L36.4 9.0 L34.9 11.0 L33.4 12.9 L31.9 14.2 L30.3 14.7 L28.8 14.2 L27.3 12.9 L25.8 11.0 L24.3 9.0 L22.8 7.3 L21.2 6.2 L19.7 5.8 L18.2 6.3 L16.7 7.2 L15.2 8.3 L13.7 9.2 L12.1 9.6 L10.6 9.3 L9.1 8.4 L7.6 6.9 L6.1 5.2 L4.6 3.6 L3.0 2.2 L1.5 1.2 L0.0 0.0zM2 0H55.8M11.0 0l7.3 -8.1M11.0 0l7.3 8.1M22.1 0l7.3 -8.1M22.1 0l7.3 8.1M33.1 0l7.3 -8.1M33.1 0l7.3 8.1M44.1 0l7.3 -8.1M44.1 0l7.3 8.1"/><path transform="translate(42.4 53.4) rotate(-38.0)" d="M0.0 -0.0 L1.5 -1.1 L2.9 -2.2 L4.4 -3.5 L5.9 -5.1 L7.4 -6.7 L8.8 -8.2 L10.3 -9.1 L11.8 -9.4 L13.3 -9.0 L14.7 -8.1 L16.2 -7.0 L17.7 -6.1 L19.2 -5.7 L20.6 -6.0 L22.1 -7.1 L23.6 -8.8 L25.1 -10.8 L26.5 -12.6 L28.0 -13.9 L29.5 -14.4 L31.0 -13.9 L32.4 -12.6 L33.9 -10.8 L35.4 -8.8 L36.9 -7.1 L38.3 -6.0 L39.8 -5.7 L41.3 -6.1 L42.7 -7.0 L44.2 -8.1 L45.7 -9.0 L47.2 -9.4 L48.6 -9.1 L50.1 -8.2 L51.6 -6.7 L53.1 -5.1 L54.5 -3.5 L56.0 -2.2 L57.5 -1.1 L59.0 -0.0 L59.0 0.0 L57.5 1.1 L56.0 2.2 L54.5 3.5 L53.1 5.1 L51.6 6.7 L50.1 8.2 L48.6 9.1 L47.2 9.4 L45.7 9.0 L44.2 8.1 L42.7 7.0 L41.3 6.1 L39.8 5.7 L38.3 6.0 L36.9 7.1 L35.4 8.8 L33.9 10.8 L32.4 12.6 L31.0 13.9 L29.5 14.4 L28.0 13.9 L26.5 12.6 L25.1 10.8 L23.6 8.8 L22.1 7.1 L20.6 6.0 L19.2 5.7 L17.7 6.1 L16.2 7.0 L14.7 8.1 L13.3 9.0 L11.8 9.4 L10.3 9.1 L8.8 8.2 L7.4 6.7 L5.9 5.1 L4.4 3.5 L2.9 2.2 L1.5 1.1 L0.0 0.0zM2 0H54.2M10.7 0l7.1 -7.9M10.7 0l7.1 7.9M21.4 0l7.1 -7.9M21.4 0l7.1 7.9M32.2 0l7.1 -7.9M32.2 0l7.1 7.9M42.9 0l7.1 -7.9M42.9 0l7.1 7.9"/><path transform="translate(77.7 57.1) rotate(50.1)" d="M0.0 -0.0 L1.4 -1.1 L2.8 -2.1 L4.3 -3.4 L5.7 -4.9 L7.1 -6.5 L8.5 -7.9 L9.9 -8.8 L11.4 -9.1 L12.8 -8.7 L14.2 -7.9 L15.6 -6.8 L17.0 -5.9 L18.5 -5.5 L19.9 -5.8 L21.3 -6.9 L22.7 -8.5 L24.1 -10.4 L25.6 -12.2 L27.0 -13.5 L28.4 -13.9 L29.8 -13.5 L31.2 -12.2 L32.7 -10.4 L34.1 -8.5 L35.5 -6.9 L36.9 -5.8 L38.3 -5.5 L39.8 -5.9 L41.2 -6.8 L42.6 -7.9 L44.0 -8.7 L45.4 -9.1 L46.9 -8.8 L48.3 -7.9 L49.7 -6.5 L51.1 -4.9 L52.5 -3.4 L54.0 -2.1 L55.4 -1.1 L56.8 -0.0 L56.8 0.0 L55.4 1.1 L54.0 2.1 L52.5 3.4 L51.1 4.9 L49.7 6.5 L48.3 7.9 L46.9 8.8 L45.4 9.1 L44.0 8.7 L42.6 7.9 L41.2 6.8 L39.8 5.9 L38.3 5.5 L36.9 5.8 L35.5 6.9 L34.1 8.5 L32.7 10.4 L31.2 12.2 L29.8 13.5 L28.4 13.9 L27.0 13.5 L25.6 12.2 L24.1 10.4 L22.7 8.5 L21.3 6.9 L19.9 5.8 L18.5 5.5 L17.0 5.9 L15.6 6.8 L14.2 7.9 L12.8 8.7 L11.4 9.1 L9.9 8.8 L8.5 7.9 L7.1 6.5 L5.7 4.9 L4.3 3.4 L2.8 2.1 L1.4 1.1 L0.0 0.0zM2 0H52.2M10.3 0l6.8 -7.7M10.3 0l6.8 7.7M20.7 0l6.8 -7.7M20.7 0l6.8 7.7M31.0 0l6.8 -7.7M31.0 0l6.8 7.7M41.3 0l6.8 -7.7M41.3 0l6.8 7.7"/><path transform="translate(111.5 56.5) rotate(-51.7)" d="M0.0 -0.0 L1.4 -1.1 L2.7 -2.0 L4.1 -3.3 L5.5 -4.8 L6.8 -6.3 L8.2 -7.6 L9.6 -8.5 L10.9 -8.8 L12.3 -8.4 L13.7 -7.6 L15.0 -6.6 L16.4 -5.7 L17.8 -5.3 L19.1 -5.6 L20.5 -6.7 L21.8 -8.2 L23.2 -10.1 L24.6 -11.8 L25.9 -13.0 L27.3 -13.5 L28.7 -13.0 L30.0 -11.8 L31.4 -10.1 L32.8 -8.2 L34.1 -6.7 L35.5 -5.6 L36.9 -5.3 L38.2 -5.7 L39.6 -6.6 L41.0 -7.6 L42.3 -8.4 L43.7 -8.8 L45.1 -8.5 L46.4 -7.6 L47.8 -6.3 L49.2 -4.8 L50.5 -3.3 L51.9 -2.0 L53.3 -1.1 L54.6 -0.0 L54.6 0.0 L53.3 1.1 L51.9 2.0 L50.5 3.3 L49.2 4.8 L47.8 6.3 L46.4 7.6 L45.1 8.5 L43.7 8.8 L42.3 8.4 L41.0 7.6 L39.6 6.6 L38.2 5.7 L36.9 5.3 L35.5 5.6 L34.1 6.7 L32.8 8.2 L31.4 10.1 L30.0 11.8 L28.7 13.0 L27.3 13.5 L25.9 13.0 L24.6 11.8 L23.2 10.1 L21.8 8.2 L20.5 6.7 L19.1 5.6 L17.8 5.3 L16.4 5.7 L15.0 6.6 L13.7 7.6 L12.3 8.4 L10.9 8.8 L9.6 8.5 L8.2 7.6 L6.8 6.3 L5.5 4.8 L4.1 3.3 L2.7 2.0 L1.4 1.1 L0.0 0.0zM2 0H50.3M9.9 0l6.6 -7.4M9.9 0l6.6 7.4M19.9 0l6.6 -7.4M19.9 0l6.6 7.4M29.8 0l6.6 -7.4M29.8 0l6.6 7.4M39.7 0l6.6 -7.4M39.7 0l6.6 7.4"/><path transform="translate(150.8 52.5) rotate(40.6)" d="M0.0 -0.0 L1.3 -1.0 L2.6 -2.0 L3.9 -3.2 L5.2 -4.6 L6.5 -6.1 L7.8 -7.3 L9.1 -8.2 L10.4 -8.4 L11.7 -8.1 L13.0 -7.3 L14.3 -6.3 L15.6 -5.5 L16.9 -5.1 L18.2 -5.4 L19.5 -6.4 L20.8 -7.9 L22.1 -9.7 L23.4 -11.3 L24.7 -12.5 L26.0 -12.9 L27.3 -12.5 L28.6 -11.3 L29.9 -9.7 L31.2 -7.9 L32.5 -6.4 L33.8 -5.4 L35.1 -5.1 L36.4 -5.5 L37.7 -6.3 L39.0 -7.3 L40.3 -8.1 L41.6 -8.4 L42.9 -8.2 L44.2 -7.3 L45.5 -6.1 L46.8 -4.6 L48.1 -3.2 L49.4 -2.0 L50.7 -1.0 L52.0 -0.0 L52.0 0.0 L50.7 1.0 L49.4 2.0 L48.1 3.2 L46.8 4.6 L45.5 6.1 L44.2 7.3 L42.9 8.2 L41.6 8.4 L40.3 8.1 L39.0 7.3 L37.7 6.3 L36.4 5.5 L35.1 5.1 L33.8 5.4 L32.5 6.4 L31.2 7.9 L29.9 9.7 L28.6 11.3 L27.3 12.5 L26.0 12.9 L24.7 12.5 L23.4 11.3 L22.1 9.7 L20.8 7.9 L19.5 6.4 L18.2 5.4 L16.9 5.1 L15.6 5.5 L14.3 6.3 L13.0 7.3 L11.7 8.1 L10.4 8.4 L9.1 8.2 L7.8 7.3 L6.5 6.1 L5.2 4.6 L3.9 3.2 L2.6 2.0 L1.3 1.0 L0.0 0.0zM2 0H47.9M9.5 0l6.2 -7.1M9.5 0l6.2 7.1M18.9 0l6.2 -7.1M18.9 0l6.2 7.1M28.4 0l6.2 -7.1M28.4 0l6.2 7.1M37.8 0l6.2 -7.1M37.8 0l6.2 7.1"/><path transform="translate(189.5 47.4) rotate(-54.9)" d="M0.0 -0.0 L1.2 -1.0 L2.5 -1.9 L3.7 -3.0 L4.9 -4.4 L6.2 -5.8 L7.4 -7.0 L8.6 -7.8 L9.9 -8.1 L11.1 -7.8 L12.4 -7.0 L13.6 -6.1 L14.8 -5.3 L16.1 -4.9 L17.3 -5.2 L18.5 -6.1 L19.8 -7.6 L21.0 -9.3 L22.2 -10.9 L23.5 -12.0 L24.7 -12.4 L25.9 -12.0 L27.2 -10.9 L28.4 -9.3 L29.6 -7.6 L30.9 -6.1 L32.1 -5.2 L33.4 -4.9 L34.6 -5.3 L35.8 -6.1 L37.1 -7.0 L38.3 -7.8 L39.5 -8.1 L40.8 -7.8 L42.0 -7.0 L43.2 -5.8 L44.5 -4.4 L45.7 -3.0 L46.9 -1.9 L48.2 -1.0 L49.4 -0.0 L49.4 0.0 L48.2 1.0 L46.9 1.9 L45.7 3.0 L44.5 4.4 L43.2 5.8 L42.0 7.0 L40.8 7.8 L39.5 8.1 L38.3 7.8 L37.1 7.0 L35.8 6.1 L34.6 5.3 L33.4 4.9 L32.1 5.2 L30.9 6.1 L29.6 7.6 L28.4 9.3 L27.2 10.9 L25.9 12.0 L24.7 12.4 L23.5 12.0 L22.2 10.9 L21.0 9.3 L19.8 7.6 L18.5 6.1 L17.3 5.2 L16.1 4.9 L14.8 5.3 L13.6 6.1 L12.4 7.0 L11.1 7.8 L9.9 8.1 L8.6 7.8 L7.4 7.0 L6.2 5.8 L4.9 4.4 L3.7 3.0 L2.5 1.9 L1.2 1.0 L0.0 0.0zM2 0H45.5M9.0 0l5.9 -6.8M9.0 0l5.9 6.8M18.0 0l5.9 -6.8M18.0 0l5.9 6.8M27.0 0l5.9 -6.8M27.0 0l5.9 6.8M35.9 0l5.9 -6.8M35.9 0l5.9 6.8"/><path transform="translate(228.2 44.1) rotate(45.8)" d="M0.0 -0.0 L1.2 -0.9 L2.3 -1.8 L3.5 -2.9 L4.7 -4.2 L5.9 -5.6 L7.0 -6.7 L8.2 -7.5 L9.4 -7.7 L10.5 -7.4 L11.7 -6.7 L12.9 -5.8 L14.0 -5.0 L15.2 -4.7 L16.4 -5.0 L17.6 -5.9 L18.7 -7.2 L19.9 -8.9 L21.1 -10.4 L22.2 -11.5 L23.4 -11.9 L24.6 -11.5 L25.7 -10.4 L26.9 -8.9 L28.1 -7.2 L29.3 -5.9 L30.4 -5.0 L31.6 -4.7 L32.8 -5.0 L33.9 -5.8 L35.1 -6.7 L36.3 -7.4 L37.4 -7.7 L38.6 -7.5 L39.8 -6.7 L41.0 -5.6 L42.1 -4.2 L43.3 -2.9 L44.5 -1.8 L45.6 -0.9 L46.8 -0.0 L46.8 0.0 L45.6 0.9 L44.5 1.8 L43.3 2.9 L42.1 4.2 L41.0 5.6 L39.8 6.7 L38.6 7.5 L37.4 7.7 L36.3 7.4 L35.1 6.7 L33.9 5.8 L32.8 5.0 L31.6 4.7 L30.4 5.0 L29.3 5.9 L28.1 7.2 L26.9 8.9 L25.7 10.4 L24.6 11.5 L23.4 11.9 L22.2 11.5 L21.1 10.4 L19.9 8.9 L18.7 7.2 L17.6 5.9 L16.4 5.0 L15.2 4.7 L14.0 5.0 L12.9 5.8 L11.7 6.7 L10.5 7.4 L9.4 7.7 L8.2 7.5 L7.0 6.7 L5.9 5.6 L4.7 4.2 L3.5 2.9 L2.3 1.8 L1.2 0.9 L0.0 0.0zM2 0H43.1M8.5 0l5.6 -6.5M8.5 0l5.6 6.5M17.0 0l5.6 -6.5M17.0 0l5.6 6.5M25.5 0l5.6 -6.5M25.5 0l5.6 6.5M34.0 0l5.6 -6.5M34.0 0l5.6 6.5"/><path transform="translate(267.7 45.4) rotate(-41.6)" d="M0.0 -0.0 L1.1 -0.9 L2.2 -1.7 L3.3 -2.8 L4.4 -4.0 L5.5 -5.3 L6.6 -6.4 L7.7 -7.2 L8.8 -7.4 L9.9 -7.1 L11.1 -6.4 L12.2 -5.5 L13.3 -4.8 L14.4 -4.5 L15.5 -4.7 L16.6 -5.6 L17.7 -6.9 L18.8 -8.5 L19.9 -9.9 L21.0 -10.9 L22.1 -11.3 L23.2 -10.9 L24.3 -9.9 L25.4 -8.5 L26.5 -6.9 L27.6 -5.6 L28.7 -4.7 L29.8 -4.5 L30.9 -4.8 L32.0 -5.5 L33.2 -6.4 L34.3 -7.1 L35.4 -7.4 L36.5 -7.2 L37.6 -6.4 L38.7 -5.3 L39.8 -4.0 L40.9 -2.8 L42.0 -1.7 L43.1 -0.9 L44.2 -0.0 L44.2 0.0 L43.1 0.9 L42.0 1.7 L40.9 2.8 L39.8 4.0 L38.7 5.3 L37.6 6.4 L36.5 7.2 L35.4 7.4 L34.3 7.1 L33.2 6.4 L32.0 5.5 L30.9 4.8 L29.8 4.5 L28.7 4.7 L27.6 5.6 L26.5 6.9 L25.4 8.5 L24.3 9.9 L23.2 10.9 L22.1 11.3 L21.0 10.9 L19.9 9.9 L18.8 8.5 L17.7 6.9 L16.6 5.6 L15.5 4.7 L14.4 4.5 L13.3 4.8 L12.2 5.5 L11.1 6.4 L9.9 7.1 L8.8 7.4 L7.7 7.2 L6.6 6.4 L5.5 5.3 L4.4 4.0 L3.3 2.8 L2.2 1.7 L1.1 0.9 L0.0 0.0zM2 0H40.7M8.0 0l5.3 -6.2M8.0 0l5.3 6.2M16.1 0l5.3 -6.2M16.1 0l5.3 6.2M24.1 0l5.3 -6.2M24.1 0l5.3 6.2M32.1 0l5.3 -6.2M32.1 0l5.3 6.2"/><path d="M330.0 62.0C360.0 84.0 380.0 66.0 364.0 52.0C352.0 42.0 338.0 56.0 348.0 64.0" fill="none"/><path d="M63.76000000000002 56.240000000000016C73.76000000000002 116.24000000000001 133.76000000000002 146.24 193.76000000000002 126.24000000000001" fill="none"/><path transform="translate(75.4 88.5) rotate(11.3)" d="M0.0 -0.0 L1.2 -0.9 L2.5 -1.8 L3.7 -2.9 L4.9 -4.2 L6.1 -5.6 L7.4 -6.8 L8.6 -7.6 L9.8 -7.8 L11.0 -7.5 L12.3 -6.8 L13.5 -5.9 L14.7 -5.1 L15.9 -4.8 L17.2 -5.0 L18.4 -5.9 L19.6 -7.3 L20.8 -9.0 L22.1 -10.5 L23.3 -11.6 L24.5 -12.0 L25.7 -11.6 L27.0 -10.5 L28.2 -9.0 L29.4 -7.3 L30.6 -5.9 L31.9 -5.0 L33.1 -4.8 L34.3 -5.1 L35.5 -5.9 L36.8 -6.8 L38.0 -7.5 L39.2 -7.8 L40.4 -7.6 L41.7 -6.8 L42.9 -5.6 L44.1 -4.2 L45.3 -2.9 L46.6 -1.8 L47.8 -0.9 L49.0 -0.0 L49.0 0.0 L47.8 0.9 L46.6 1.8 L45.3 2.9 L44.1 4.2 L42.9 5.6 L41.7 6.8 L40.4 7.6 L39.2 7.8 L38.0 7.5 L36.8 6.8 L35.5 5.9 L34.3 5.1 L33.1 4.8 L31.9 5.0 L30.6 5.9 L29.4 7.3 L28.2 9.0 L27.0 10.5 L25.7 11.6 L24.5 12.0 L23.3 11.6 L22.1 10.5 L20.8 9.0 L19.6 7.3 L18.4 5.9 L17.2 5.0 L15.9 4.8 L14.7 5.1 L13.5 5.9 L12.3 6.8 L11.0 7.5 L9.8 7.8 L8.6 7.6 L7.4 6.8 L6.1 5.6 L4.9 4.2 L3.7 2.9 L2.5 1.8 L1.2 0.9 L0.0 0.0zM2 0H45.1M8.9 0l5.9 -6.6M8.9 0l5.9 6.6M17.8 0l5.9 -6.6M17.8 0l5.9 6.6M26.7 0l5.9 -6.6M26.7 0l5.9 6.6M35.6 0l5.9 -6.6M35.6 0l5.9 6.6"/><path transform="translate(96.6 112.6) rotate(86.0)" d="M0.0 -0.0 L1.1 -0.9 L2.3 -1.7 L3.4 -2.7 L4.5 -4.0 L5.7 -5.3 L6.8 -6.4 L7.9 -7.1 L9.1 -7.3 L10.2 -7.0 L11.3 -6.3 L12.5 -5.5 L13.6 -4.8 L14.7 -4.5 L15.9 -4.7 L17.0 -5.5 L18.1 -6.9 L19.3 -8.4 L20.4 -9.8 L21.5 -10.9 L22.7 -11.2 L23.8 -10.9 L24.9 -9.8 L26.1 -8.4 L27.2 -6.9 L28.3 -5.5 L29.5 -4.7 L30.6 -4.5 L31.7 -4.8 L32.9 -5.5 L34.0 -6.3 L35.1 -7.0 L36.3 -7.3 L37.4 -7.1 L38.5 -6.4 L39.7 -5.3 L40.8 -4.0 L41.9 -2.7 L43.1 -1.7 L44.2 -0.9 L45.3 -0.0 L45.3 0.0 L44.2 0.9 L43.1 1.7 L41.9 2.7 L40.8 4.0 L39.7 5.3 L38.5 6.4 L37.4 7.1 L36.3 7.3 L35.1 7.0 L34.0 6.3 L32.9 5.5 L31.7 4.8 L30.6 4.5 L29.5 4.7 L28.3 5.5 L27.2 6.9 L26.1 8.4 L24.9 9.8 L23.8 10.9 L22.7 11.2 L21.5 10.9 L20.4 9.8 L19.3 8.4 L18.1 6.9 L17.0 5.5 L15.9 4.7 L14.7 4.5 L13.6 4.8 L12.5 5.5 L11.3 6.3 L10.2 7.0 L9.1 7.3 L7.9 7.1 L6.8 6.4 L5.7 5.3 L4.5 4.0 L3.4 2.7 L2.3 1.7 L1.1 0.9 L0.0 0.0zM2 0H41.7M8.2 0l5.4 -6.2M8.2 0l5.4 6.2M16.5 0l5.4 -6.2M16.5 0l5.4 6.2M24.7 0l5.4 -6.2M24.7 0l5.4 6.2M33.0 0l5.4 -6.2M33.0 0l5.4 6.2"/><path transform="translate(125.0 127.5) rotate(-30.1)" d="M0.0 -0.0 L1.0 -0.8 L2.1 -1.6 L3.1 -2.6 L4.2 -3.7 L5.2 -4.9 L6.2 -5.9 L7.3 -6.6 L8.3 -6.8 L9.4 -6.5 L10.4 -5.9 L11.4 -5.1 L12.5 -4.4 L13.5 -4.1 L14.6 -4.4 L15.6 -5.2 L16.7 -6.4 L17.7 -7.8 L18.7 -9.2 L19.8 -10.1 L20.8 -10.5 L21.9 -10.1 L22.9 -9.2 L23.9 -7.8 L25.0 -6.4 L26.0 -5.2 L27.1 -4.4 L28.1 -4.1 L29.1 -4.4 L30.2 -5.1 L31.2 -5.9 L32.3 -6.5 L33.3 -6.8 L34.3 -6.6 L35.4 -5.9 L36.4 -4.9 L37.5 -3.7 L38.5 -2.6 L39.6 -1.6 L40.6 -0.8 L41.6 -0.0 L41.6 0.0 L40.6 0.8 L39.6 1.6 L38.5 2.6 L37.5 3.7 L36.4 4.9 L35.4 5.9 L34.3 6.6 L33.3 6.8 L32.3 6.5 L31.2 5.9 L30.2 5.1 L29.1 4.4 L28.1 4.1 L27.1 4.4 L26.0 5.2 L25.0 6.4 L23.9 7.8 L22.9 9.2 L21.9 10.1 L20.8 10.5 L19.8 10.1 L18.7 9.2 L17.7 7.8 L16.7 6.4 L15.6 5.2 L14.6 4.4 L13.5 4.1 L12.5 4.4 L11.4 5.1 L10.4 5.9 L9.4 6.5 L8.3 6.8 L7.3 6.6 L6.2 5.9 L5.2 4.9 L4.2 3.7 L3.1 2.6 L2.1 1.6 L1.0 0.8 L0.0 0.0zM2 0H38.3M7.6 0l5.0 -5.8M7.6 0l5.0 5.8M15.1 0l5.0 -5.8M15.1 0l5.0 5.8M22.7 0l5.0 -5.8M22.7 0l5.0 5.8M30.3 0l5.0 -5.8M30.3 0l5.0 5.8"/><path transform="translate(158.2 132.4) rotate(47.2)" d="M0.0 -0.0 L0.9 -0.8 L1.9 -1.5 L2.8 -2.4 L3.8 -3.4 L4.7 -4.5 L5.7 -5.5 L6.6 -6.1 L7.6 -6.3 L8.5 -6.1 L9.5 -5.5 L10.4 -4.7 L11.4 -4.1 L12.3 -3.8 L13.3 -4.1 L14.2 -4.8 L15.2 -5.9 L16.1 -7.3 L17.1 -8.5 L18.0 -9.4 L19.0 -9.7 L19.9 -9.4 L20.9 -8.5 L21.8 -7.3 L22.8 -5.9 L23.7 -4.8 L24.7 -4.1 L25.6 -3.8 L26.6 -4.1 L27.5 -4.7 L28.5 -5.5 L29.4 -6.1 L30.4 -6.3 L31.3 -6.1 L32.3 -5.5 L33.2 -4.5 L34.1 -3.4 L35.1 -2.4 L36.0 -1.5 L37.0 -0.8 L37.9 -0.0 L37.9 0.0 L37.0 0.8 L36.0 1.5 L35.1 2.4 L34.1 3.4 L33.2 4.5 L32.3 5.5 L31.3 6.1 L30.4 6.3 L29.4 6.1 L28.5 5.5 L27.5 4.7 L26.6 4.1 L25.6 3.8 L24.7 4.1 L23.7 4.8 L22.8 5.9 L21.8 7.3 L20.9 8.5 L19.9 9.4 L19.0 9.7 L18.0 9.4 L17.1 8.5 L16.1 7.3 L15.2 5.9 L14.2 4.8 L13.3 4.1 L12.3 3.8 L11.4 4.1 L10.4 4.7 L9.5 5.5 L8.5 6.1 L7.6 6.3 L6.6 6.1 L5.7 5.5 L4.7 4.5 L3.8 3.4 L2.8 2.4 L1.9 1.5 L0.9 0.8 L0.0 0.0zM2 0H34.9M6.9 0l4.6 -5.3M6.9 0l4.6 5.3M13.8 0l4.6 -5.3M13.8 0l4.6 5.3M20.7 0l4.6 -5.3M20.7 0l4.6 5.3M27.6 0l4.6 -5.3M27.6 0l4.6 5.3"/><path d="M210.6 135.2 L206.9 135.7 L203.3 135.6 L199.8 134.9 L196.6 133.6 L193.6 131.9 L191.0 129.7 L188.9 127.1 L187.2 124.3 L186.1 121.2 L185.5 118.1 L185.4 115.0 L185.9 112.0 L186.8 109.1 L188.2 106.5 L190.0 104.2 L192.1 102.3 L194.4 100.8 L196.9 99.7 L199.5 99.1 L202.2 98.9 L204.7 99.2 L207.1 99.9 L209.3 101.0 L211.3 102.4 L213.0 104.0 L214.3 105.9 L215.2 107.9 L215.8 110.0 L216.0 112.2 L215.9 114.2 L215.4 116.2 L214.6 118.0 L213.5 119.6 L212.2 120.9 L210.8 122.0 L209.2 122.8 L207.6 123.3 L205.9 123.5 L204.3 123.4 L202.8 123.0 L201.5 122.4 L200.3 121.6 L199.3 120.7 L198.5 119.6 L198.0 118.4 L197.7 117.3 L197.5 116.1 L197.6 115.0 L197.9 114.0 L198.4 113.1 L199.0 112.3 L199.6 111.7 L200.3 111.3 L201.1 111.0 L201.8 110.9 L202.5 110.9 L203.2 111.1 L203.7 111.4 L204.1 111.7 L204.4 112.1" fill="none"/><path d="M163.75 50.75C173.75 20.75 213.75 0.75 253.75 8.75" fill="none"/><path transform="translate(180.0 26.9) rotate(6.5)" d="M0.0 -0.0 L1.0 -0.8 L1.9 -1.4 L2.9 -2.3 L3.9 -3.4 L4.9 -4.5 L5.8 -5.4 L6.8 -6.0 L7.8 -6.2 L8.7 -6.0 L9.7 -5.4 L10.7 -4.7 L11.7 -4.1 L12.6 -3.8 L13.6 -4.0 L14.6 -4.7 L15.5 -5.8 L16.5 -7.2 L17.5 -8.4 L18.5 -9.2 L19.4 -9.6 L20.4 -9.2 L21.4 -8.4 L22.3 -7.2 L23.3 -5.8 L24.3 -4.7 L25.2 -4.0 L26.2 -3.8 L27.2 -4.1 L28.2 -4.7 L29.1 -5.4 L30.1 -6.0 L31.1 -6.2 L32.0 -6.0 L33.0 -5.4 L34.0 -4.5 L35.0 -3.4 L35.9 -2.3 L36.9 -1.4 L37.9 -0.8 L38.8 -0.0 L38.8 0.0 L37.9 0.8 L36.9 1.4 L35.9 2.3 L35.0 3.4 L34.0 4.5 L33.0 5.4 L32.0 6.0 L31.1 6.2 L30.1 6.0 L29.1 5.4 L28.2 4.7 L27.2 4.1 L26.2 3.8 L25.2 4.0 L24.3 4.7 L23.3 5.8 L22.3 7.2 L21.4 8.4 L20.4 9.2 L19.4 9.6 L18.5 9.2 L17.5 8.4 L16.5 7.2 L15.5 5.8 L14.6 4.7 L13.6 4.0 L12.6 3.8 L11.7 4.1 L10.7 4.7 L9.7 5.4 L8.7 6.0 L7.8 6.2 L6.8 6.0 L5.8 5.4 L4.9 4.5 L3.9 3.4 L2.9 2.3 L1.9 1.4 L1.0 0.8 L0.0 0.0zM2 0H35.7M7.1 0l4.7 -5.3M7.1 0l4.7 5.3M14.1 0l4.7 -5.3M14.1 0l4.7 5.3M21.2 0l4.7 -5.3M21.2 0l4.7 5.3M28.2 0l4.7 -5.3M28.2 0l4.7 5.3"/><path transform="translate(207.7 11.4) rotate(-66.1)" d="M0.0 -0.0 L0.9 -0.7 L1.7 -1.3 L2.6 -2.1 L3.4 -3.1 L4.3 -4.0 L5.1 -4.9 L6.0 -5.4 L6.9 -5.6 L7.7 -5.4 L8.6 -4.9 L9.4 -4.2 L10.3 -3.7 L11.1 -3.4 L12.0 -3.6 L12.9 -4.3 L13.7 -5.3 L14.6 -6.4 L15.4 -7.6 L16.3 -8.3 L17.1 -8.6 L18.0 -8.3 L18.9 -7.6 L19.7 -6.4 L20.6 -5.3 L21.4 -4.3 L22.3 -3.6 L23.1 -3.4 L24.0 -3.7 L24.9 -4.2 L25.7 -4.9 L26.6 -5.4 L27.4 -5.6 L28.3 -5.4 L29.1 -4.9 L30.0 -4.0 L30.9 -3.1 L31.7 -2.1 L32.6 -1.3 L33.4 -0.7 L34.3 -0.0 L34.3 0.0 L33.4 0.7 L32.6 1.3 L31.7 2.1 L30.9 3.1 L30.0 4.0 L29.1 4.9 L28.3 5.4 L27.4 5.6 L26.6 5.4 L25.7 4.9 L24.9 4.2 L24.0 3.7 L23.1 3.4 L22.3 3.6 L21.4 4.3 L20.6 5.3 L19.7 6.4 L18.9 7.6 L18.0 8.3 L17.1 8.6 L16.3 8.3 L15.4 7.6 L14.6 6.4 L13.7 5.3 L12.9 4.3 L12.0 3.6 L11.1 3.4 L10.3 3.7 L9.4 4.2 L8.6 4.9 L7.7 5.4 L6.9 5.6 L6.0 5.4 L5.1 4.9 L4.3 4.0 L3.4 3.1 L2.6 2.1 L1.7 1.3 L0.9 0.7 L0.0 0.0zM2 0H31.5M6.2 0l4.1 -4.7M6.2 0l4.1 4.7M12.5 0l4.1 -4.7M12.5 0l4.1 4.7M18.7 0l4.1 -4.7M18.7 0l4.1 4.7M24.9 0l4.1 -4.7M24.9 0l4.1 4.7"/><path transform="translate(241.8 7.2) rotate(51.7)" d="M0.0 -0.0 L0.7 -0.6 L1.5 -1.2 L2.2 -1.9 L3.0 -2.7 L3.7 -3.6 L4.5 -4.3 L5.2 -4.8 L5.9 -5.0 L6.7 -4.8 L7.4 -4.3 L8.2 -3.8 L8.9 -3.3 L9.7 -3.0 L10.4 -3.2 L11.1 -3.8 L11.9 -4.7 L12.6 -5.7 L13.4 -6.7 L14.1 -7.4 L14.9 -7.7 L15.6 -7.4 L16.4 -6.7 L17.1 -5.7 L17.8 -4.7 L18.6 -3.8 L19.3 -3.2 L20.1 -3.0 L20.8 -3.3 L21.6 -3.8 L22.3 -4.3 L23.0 -4.8 L23.8 -5.0 L24.5 -4.8 L25.3 -4.3 L26.0 -3.6 L26.8 -2.7 L27.5 -1.9 L28.2 -1.2 L29.0 -0.6 L29.7 -0.0 L29.7 0.0 L29.0 0.6 L28.2 1.2 L27.5 1.9 L26.8 2.7 L26.0 3.6 L25.3 4.3 L24.5 4.8 L23.8 5.0 L23.0 4.8 L22.3 4.3 L21.6 3.8 L20.8 3.3 L20.1 3.0 L19.3 3.2 L18.6 3.8 L17.8 4.7 L17.1 5.7 L16.4 6.7 L15.6 7.4 L14.9 7.7 L14.1 7.4 L13.4 6.7 L12.6 5.7 L11.9 4.7 L11.1 3.8 L10.4 3.2 L9.7 3.0 L8.9 3.3 L8.2 3.8 L7.4 4.3 L6.7 4.8 L5.9 5.0 L5.2 4.8 L4.5 4.3 L3.7 3.6 L3.0 2.7 L2.2 1.9 L1.5 1.2 L0.7 0.6 L0.0 0.0zM2 0H27.4M5.4 0l3.6 -4.2M5.4 0l3.6 4.2M10.8 0l3.6 -4.2M10.8 0l3.6 4.2M16.2 0l3.6 -4.2M16.2 0l3.6 4.2M21.6 0l3.6 -4.2M21.6 0l3.6 4.2"/><path d="M259.8 2.8 L257.3 3.2 L255.0 4.0 L252.8 5.1 L250.9 6.6 L249.3 8.3 L248.0 10.2 L247.0 12.2 L246.4 14.4 L246.1 16.6 L246.2 18.8 L246.6 20.8 L247.3 22.8 L248.3 24.6 L249.5 26.2 L251.0 27.5 L252.6 28.6 L254.3 29.4 L256.1 29.9 L258.0 30.0 L259.8 29.9 L261.5 29.6 L263.1 28.9 L264.5 28.1 L265.8 27.0 L266.8 25.8 L267.6 24.5 L268.2 23.1 L268.6 21.6 L268.7 20.2 L268.6 18.8 L268.2 17.4 L267.7 16.2 L266.9 15.1 L266.1 14.1 L265.1 13.4 L264.1 12.8 L263.0 12.4 L261.9 12.2 L260.8 12.2 L259.8 12.3 L258.8 12.7 L257.9 13.1 L257.2 13.7 L256.6 14.3 L256.1 15.1 L255.7 15.8 L255.5 16.6 L255.5 17.4 L255.6 18.1 L255.8 18.8 L256.0 19.3 L256.4 19.8 L256.8 20.2 L257.3 20.5 L257.8 20.7 L258.2 20.8 L258.7 20.8 L259.1 20.7 L259.5 20.6 L259.8 20.4" fill="none"/><path d="M49.4 164.1 L46.4 167.1 L42.9 169.4 L39.1 171.0 L35.2 172.0 L31.2 172.2 L27.3 171.7 L23.6 170.5 L20.2 168.7 L17.3 166.4 L14.8 163.7 L13.0 160.6 L11.7 157.2 L11.1 153.8 L11.0 150.4 L11.6 147.1 L12.8 144.0 L14.4 141.2 L16.5 138.8 L18.9 136.9 L21.6 135.5 L24.4 134.5 L27.3 134.1 L30.2 134.3 L32.9 134.9 L35.4 136.0 L37.6 137.5 L39.4 139.3 L40.9 141.4 L42.0 143.6 L42.6 145.9 L42.7 148.3 L42.5 150.5 L41.8 152.6 L40.8 154.6 L39.6 156.2 L38.0 157.6 L36.4 158.6 L34.6 159.2 L32.8 159.6 L31.0 159.5 L29.3 159.2 L27.8 158.6 L26.5 157.7 L25.3 156.7 L24.5 155.5 L23.9 154.2 L23.6 152.9 L23.5 151.7 L23.7 150.5 L24.0 149.4 L24.6 148.4 L25.3 147.7 L26.1 147.1 L26.9 146.7 L27.7 146.5 L28.5 146.5 L29.2 146.6 L29.9 146.9 L30.4 147.3 L30.7 147.7" fill="none"/><path d="M-6 120C10 150 14 170 30 172" fill="none"/></g></symbol></svg>
 
-
-
 <div class="doors" id="doors">
-
- <div class="door dl"></div>
-
- <div class="door dr"></div>
-
- <button class="medal" id="openBtn" aria-label="Ouvrir l’invitation">
-
-    <b>Maria</b><i>&amp;</i><b>Abderrahmane</b>
-
-  <small>Touchez pour ouvrir</small>
-
- </button>
-
+ <div class="door dl"></div>
+ <div class="door dr"></div>
+ <button class="medal" id="openBtn" aria-label="Ouvrir l’invitation">
+    <b>Maria</b><i>&amp;</i><b>Abderrahmane</b>
+  <small>Touchez pour ouvrir</small>
+ </button>
 </div>
-
-
 
 <main>
+ <header class="hero"><svg class="orn tl" viewBox="0 0 400 220" aria-hidden="true"><use href="#orn"/></svg><svg class="orn tr" viewBox="0 0 400 220" aria-hidden="true"><use href="#orn"/></svg><svg class="orn bl" viewBox="0 0 400 220" aria-hidden="true"><use href="#orn"/></svg><svg class="orn br" viewBox="0 0 400 220" aria-hidden="true"><use href="#orn"/></svg>
+  
+  
+  
+  <div>
+   <p class="bism rv" style="--i:0" lang="ar" dir="rtl">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ</p>
+   <h1 class="rv" style="--i:1"><span class="n">Maria</span><span class="amp" aria-hidden="true">&amp;</span><span class="n b">Abderrahmane</span></h1>
+   <p class="lead rv" style="--i:2">ont la joie de vous inviter à la célébration de leur mariage</p>
+  </div>
+  <a class="more rv" style="--i:3" href="#plan">Découvrir ↓</a>
+ </header>
 
- <header class="hero"><svg class="orn tl" viewBox="0 0 400 220" aria-hidden="true"><use href="#orn"/></svg><svg class="orn tr" viewBox="0 0 400 220" aria-hidden="true"><use href="#orn"/></svg><svg class="orn bl" viewBox="0 0 400 220" aria-hidden="true"><use href="#orn"/></svg><svg class="orn br" viewBox="0 0 400 220" aria-hidden="true"><use href="#orn"/></svg>
+ <section class="s plan" id="plan">
+  <h2>Nos deux jours de fête</h2>
+  <div class="cards">
+   <article class="c">
+    <h3>Henné</h3>
+    <p class="day">Jeudi</p>
+    <p class="date"><span class="dn" data-n="24">24</span> décembre 2026</p>
+    <p class="time">à 16H00</p>
+    <p class="place">Maison familiale</p>
+    <!-- ✏️ Remplacez par le lien exact Google Maps de la maison -->
+    <div class="btns"><a class="go" target="_blank" rel="noopener" href="https://maps.app.goo.gl/jkAtRfia4JAH4BU87?g_st=aw">Itinéraire</a></div>
+    </article>
+   <div class="sep" aria-hidden="true"><span>♥</span></div>
+   <article class="c">
+    <h3>Mariage</h3>
+    <p class="day">Samedi</p>
+    <p class="date"><span class="dn" data-n="26">26</span> décembre 2026</p>
+    <p class="time">à 16H00</p>
+    <p class="place">Salle Jnane Essalam</p>
+    <!-- ✏️ Remplacez par le lien exact Google Maps de la salle (Partager → Copier le lien) -->
+    <div class="btns"><a class="go" target="_blank" rel="noopener" href="https://maps.app.goo.gl/aQTzk8tvs9ccPY7M6?g_st=aw">Itinéraire</a></div>
+   </article>
+  </div>
+ </section>
 
+ <section class="s">
+  <h2>Le grand jour approche</h2>
+  <div class="count" id="count" aria-live="off"><div><b id="d">0</b><span>jours</span></div><div><b id="h">0</b><span>heures</span></div><div><b id="m">0</b><span>minutes</span></div><div><b id="s">0</b><span>secondes</span></div></div>
+ </section>
 
-
-
-
-
-
-  <div>
-
-   <p class="bism rv" style="--i:0" lang="ar" dir="rtl">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيمِ</p>
-
-   <h1 class="rv" style="--i:1"><span class="n">Maria</span><span class="amp" aria-hidden="true">&amp;</span><span class="n b">Abderrahmane</span></h1>
-
-   <p class="lead rv" style="--i:2">ont la joie de vous inviter à la célébration de leur mariage</p>
-
-  </div>
-
-  <a class="more rv" style="--i:3" href="#plan">Découvrir ↓</a>
-
- </header>
-
-
-
- <section class="s plan" id="plan">
-
-  <h2>Nos deux jours de fête</h2>
-
-  <div class="cards">
-
-   <article class="c">
-
-    <h3>Henné</h3>
-
-    <p class="day">Jeudi</p>
-
-    <p class="date"><span class="dn" data-n="24">24</span> décembre 2026</p>
-
-    <p class="time">à 16H00</p>
-
-    <p class="place">Maison familiale</p>
-
-    <!-- ✏️ Remplacez par le lien exact Google Maps de la maison -->
-
-    <div class="btns">
-  <a class="go" target="_blank" rel="noopener" href="https://maps.app.goo.gl/jkAtRfia4JAH4BU87?g_st=aw">Itinéraire</a>
-  <button class="calendar-btn" type="button"
-    data-title="Henné — Maria & Abderrahmane"
-    data-start="20261224T160000"
-    data-end="20261224T190000"
-    data-location="Maison familiale">
-    Ajouter au calendrier
-  </button>
-</div>
-
-    </article>
-
-   <div class="sep" aria-hidden="true"><span>♥</span></div>
-
-   <article class="c">
-
-    <h3>Mariage</h3>
-
-    <p class="day">Samedi</p>
-
-    <p class="date"><span class="dn" data-n="26">26</span> décembre 2026</p>
-
-    <p class="time">à 16H00</p>
-
-    <p class="place">Salle Jnane Essalam</p>
-
-    <!-- ✏️ Remplacez par le lien exact Google Maps de la salle (Partager → Copier le lien) -->
-
-    <div class="btns">
-  <a class="go" target="_blank" rel="noopener" href="https://maps.app.goo.gl/aQTzk8tvs9ccPY7M6?g_st=aw">Itinéraire</a>
-  <button class="calendar-btn" type="button"
-    data-title="Mariage — Maria & Abderrahmane"
-    data-start="20261226T160000"
-    data-end="20261226T190000"
-    data-location="Salle Jnane Essalam">
-    Ajouter au calendrier
-  </button>
-</div>
-
-   </article>
-
-  </div>
-
- </section>
-
-
-
- <section class="s">
-
-  <h2>Le grand jour approche</h2>
-
-  <div class="count" id="count" aria-live="off"><div><b id="d">0</b><span>jours</span></div><div><b id="h">0</b><span>heures</span></div><div><b id="m">0</b><span>minutes</span></div><div><b id="s">0</b><span>secondes</span></div></div>
-
- </section>
-
-
-
- <footer>
-
-  <p>Nous serions honorés de partager ce moment de bonheur avec vous</p>
-
-  <b>M &amp; A</b>
-
- </footer>
-
+ <footer>
+  <p>Nous serions honorés de partager ce moment de bonheur avec vous</p>
+  <b>Maria &amp; Abderrahmane</b>
+ </footer>
 </main>
-
 <button class="mus" id="mus" aria-label="Couper ou activer la musique">♪</button>
 
-
-
 <script>
-
 const $=id=>document.getElementById(id), target=new Date(2026,11,26,16,0,0);
-
 function tick(){let t=Math.max(0,target-new Date())/1000|0;
-
- $('d').textContent=t/86400|0;$('h').textContent=t%86400/3600|0;$('m').textContent=t%3600/60|0;$('s').textContent=t%60}
-
+ $('d').textContent=t/86400|0;$('h').textContent=t%86400/3600|0;$('m').textContent=t%3600/60|0;$('s').textContent=t%60}
 tick();setInterval(tick,1000);
 
-
-
 /* Musique douce générée (aucun fichier à héberger) */
-
 let ac,timer,on=false;const notes=[261.6,329.6,392,440,523.3,659.3,784];let k=0;
-
 function note(){const t=ac.currentTime,o=ac.createOscillator(),g=ac.createGain(),f=notes[[0,2,4,2,5,3,4,6,1,3,5,2][k++%12]];
-
- o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.07,t+.04);g.gain.exponentialRampToValueAtTime(.0008,t+2.6);
-
- o.connect(g).connect(ac.destination);o.start(t);o.stop(t+2.7)}
-
+ o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.07,t+.04);g.gain.exponentialRampToValueAtTime(.0008,t+2.6);
+ o.connect(g).connect(ac.destination);o.start(t);o.stop(t+2.7)}
 function music(v){on=v;$('mus').classList.toggle('off',!v);clearInterval(timer);
-
- if(v){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();ac.resume();note();timer=setInterval(note,780)}catch(e){}}}
-
-
+ if(v){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();ac.resume();note();timer=setInterval(note,780)}catch(e){}}}
 
 const plan=document.getElementById('plan');
-
 function count(){document.querySelectorAll('.dn').forEach((el,i)=>{const n=+el.dataset.n,t0=performance.now()+1100+i*350;
-
- (function f(t){const p=Math.min(1,Math.max(0,(t-t0)/1500));el.textContent=Math.round(n*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(performance.now())})}
-
+ (function f(t){const p=Math.min(1,Math.max(0,(t-t0)/1500));el.textContent=Math.round(n*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(performance.now())})}
 new IntersectionObserver((es,io)=>es.forEach(e=>{if(e.isIntersecting){plan.classList.add('in');count();setTimeout(()=>plan.classList.add('done'),4200);io.disconnect()}}),{threshold:.3}).observe(plan);
-
 $('mus').addEventListener('click',()=>music(!on));
-
 $('openBtn').addEventListener('click',()=>{document.body.classList.add('open');scrollTo(0,0);music(true);
-
- for(let i=0;i<40;i++){const g=document.createElement('i');g.className='gl';
-
-  g.style.cssText='left:'+(Math.random()*100)+'%;top:'+(50+Math.random()*48)+'%;--y:-'+(20+Math.random()*60)+'vh;--t:'+(3+Math.random()*3)+'s;--d:'+(.3+Math.random()*2.2)+'s';
-
-  document.body.appendChild(g);setTimeout(()=>g.remove(),9000)}});
-
-
-
-
-/* Ajout d'un événement au calendrier du téléphone/ordinateur (.ics) */
-function downloadCalendarEvent(button){
-  const title = button.dataset.title;
-  const start = button.dataset.start;
-  const end = button.dataset.end;
-  const location = button.dataset.location;
-
-  const ics = [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'PRODID:-//Maria & Abderrahmane//Invitation//FR',
-    'CALSCALE:GREGORIAN',
-    'METHOD:PUBLISH',
-    'BEGIN:VEVENT',
-    'UID:' + start + '-' + title.replace(/[^a-z0-9]/gi,'') + '@maria-abderrahmane',
-    'DTSTAMP:' + new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}Z$/,'Z'),
-    'DTSTART:' + start,
-    'DTEND:' + end,
-    'SUMMARY:' + title,
-    'LOCATION:' + location,
-    'DESCRIPTION:Invitation de mariage — Maria & Abderrahmane',
-    'END:VEVENT',
-    'END:VCALENDAR'
-  ].join('\r\n');
-
-  const blob = new Blob([ics], {type:'text/calendar;charset=utf-8'});
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = title.replace(/[^a-z0-9]+/gi,'-').toLowerCase() + '.ics';
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
-
-document.querySelectorAll('.calendar-btn').forEach(btn => {
-  btn.addEventListener('click', () => downloadCalendarEvent(btn));
-});
+ for(let i=0;i<40;i++){const g=document.createElement('i');g.className='gl';
+  g.style.cssText='left:'+(Math.random()*100)+'%;top:'+(50+Math.random()*48)+'%;--y:-'+(20+Math.random()*60)+'vh;--t:'+(3+Math.random()*3)+'s;--d:'+(.3+Math.random()*2.2)+'s';
+  document.body.appendChild(g);setTimeout(()=>g.remove(),9000)}});
 
 </script>
-
 </body>
-
 </html>
