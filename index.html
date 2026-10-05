@@ -287,6 +287,26 @@ footer b{color:var(--ink)}
 .orn{position:absolute;width:clamp(210px,50vw,480px);height:auto;pointer-events:none;overflow:visible;opacity:.95}
 .orn.tl{top:0;left:0}.orn.tr{top:0;right:0;transform:scaleX(-1)}
 .orn.bl{bottom:0;left:0;transform:scaleY(-1)}.orn.br{bottom:0;right:0;transform:scale(-1,-1)}
+
+/* Compte à rebours + pied de page : mise en page propre */
+section.s:not(.plan){padding:9vh 5vw 8vh}
+.count{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,2.5vw,22px);max-width:460px;margin:0 auto;padding:0 4px}
+.count div{width:100%;aspect-ratio:1;outline:0;padding:0;min-width:0}
+.count b{font-size:clamp(22px,7vw,38px)}
+.count span{font-size:clamp(9px,2.6vw,12px);letter-spacing:.06em;margin-top:4px}
+.cal{margin-top:5vh;display:flex;flex-direction:column;align-items:center;gap:14px}
+.cal .go{margin:0;cursor:pointer;font:700 14px 'Cormorant Garamond',serif;letter-spacing:.14em;text-transform:uppercase;padding:14px 26px}
+.gcal{font-size:15px;color:var(--taupe);font-weight:600}
+.gcal a{color:var(--ink);text-underline-offset:3px}
+footer{padding:7vh 8vw 10vh}
+footer p{margin:0 auto 4vh}
+.mn{display:flex;align-items:center;justify-content:center;gap:.25em;font:400 clamp(64px,18vw,96px)/1 'Pinyon Script',cursive;color:var(--ink)}
+.mn i{font-size:.55em;color:var(--gold)}
+
+/* Cercles : texte toujours à l'intérieur, proportionnel à la taille du cercle */
+.count div{container-type:inline-size;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-align:center}
+.count b{font-size:36cqw;line-height:1}
+.count span{font-size:14cqw;letter-spacing:0;text-transform:none;font-style:italic;font-weight:600;white-space:nowrap;line-height:1.1;margin:0}
 </style>
 </head>
 <body>
@@ -342,11 +362,17 @@ footer b{color:var(--ink)}
  <section class="s">
   <h2>Le grand jour approche</h2>
   <div class="count" id="count" aria-live="off"><div><b id="d">0</b><span>jours</span></div><div><b id="h">0</b><span>heures</span></div><div><b id="m">0</b><span>minutes</span></div><div><b id="s">0</b><span>secondes</span></div></div>
+  <div class="cal">
+   <button class="go" id="ics" type="button">Ajouter à mon calendrier</button>
+   <p class="gcal">ou via Google Agenda :
+    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Henn%C3%A9%20-%20Maria%20%26%20Abderrahmane&dates=20261224T150000Z/20261224T180000Z&location=Maison%20familiale" target="_blank" rel="noopener">Henné</a> ·
+    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Mariage%20-%20Maria%20%26%20Abderrahmane&dates=20261226T150000Z/20261226T210000Z&location=Salle%20Jnane%20Essalam" target="_blank" rel="noopener">Mariage</a></p>
+  </div>
  </section>
 
  <footer>
   <p>Nous serions honorés de partager ce moment de bonheur avec vous</p>
-  <b>Maria &amp; Abderrahmane</b>
+  <b class="mn" aria-label="Maria et Abderrahmane">M <i>&amp;</i> A</b>
  </footer>
 </main>
 <button class="mus" id="mus" aria-label="Couper ou activer la musique">♪</button>
@@ -375,6 +401,15 @@ $('openBtn').addEventListener('click',()=>{document.body.classList.add('open');s
   g.style.cssText='left:'+(Math.random()*100)+'%;top:'+(50+Math.random()*48)+'%;--y:-'+(20+Math.random()*60)+'vh;--t:'+(3+Math.random()*3)+'s;--d:'+(.3+Math.random()*2.2)+'s';
   document.body.appendChild(g);setTimeout(()=>g.remove(),9000)}});
 
+
+/* Ajout au calendrier (.ics) */
+$('ics').addEventListener('click',()=>{
+ const ev=(u,t,a,b,l)=>`BEGIN:VEVENT\r\nUID:${u}@maria-abderrahmane\r\nDTSTAMP:20261005T000000Z\r\nDTSTART:${a}\r\nDTEND:${b}\r\nSUMMARY:${t}\r\nLOCATION:${l}\r\nBEGIN:VALARM\r\nTRIGGER:-P1D\r\nACTION:DISPLAY\r\nDESCRIPTION:Rappel\r\nEND:VALARM\r\nEND:VEVENT\r\n`;
+ const ics='BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Invitation//FR\r\n'+
+  ev('henne','Henné — Maria & Abderrahmane','20261224T150000Z','20261224T180000Z','Maison familiale')+
+  ev('mariage','Mariage — Maria & Abderrahmane','20261226T150000Z','20261226T210000Z','Salle Jnane Essalam')+'END:VCALENDAR';
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar;charset=utf-8'}));
+ a.download='invitation-maria-abderrahmane.ics';document.body.appendChild(a);a.click();a.remove()});
 </script>
 </body>
 </html>
