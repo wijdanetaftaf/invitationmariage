@@ -312,6 +312,8 @@ footer p{margin:0 auto 4vh}
 .calmenu[hidden]{display:none}
 .calmenu button{font:600 17px 'Cormorant Garamond',serif;letter-spacing:.06em;color:var(--ink);background:#fff;border:1px solid var(--taupe);padding:13px 16px;cursor:pointer}
 .calmenu button:hover,.calmenu button:focus-visible{background:var(--ink);color:#fff}
+button.go{cursor:pointer;font:700 14px 'Cormorant Garamond',serif;letter-spacing:.14em;text-transform:uppercase}
+.btns{gap:0}.btns .go{width:min(260px,100%);justify-content:center}
 </style>
 </head>
 <body>
@@ -349,7 +351,7 @@ footer p{margin:0 auto 4vh}
     <p class="time">à 16H00</p>
     <p class="place">Maison familiale</p>
     <!-- ✏️ Remplacez par le lien exact Google Maps de la maison -->
-    <div class="btns"><a class="go" target="_blank" rel="noopener" href="https://maps.app.goo.gl/jkAtRfia4JAH4BU87?g_st=aw">Itinéraire</a></div>
+    <div class="btns"><a class="go" target="_blank" rel="noopener" href="https://maps.app.goo.gl/jkAtRfia4JAH4BU87?g_st=aw">Itinéraire</a><button class="go alt addcal" type="button" data-ev="henne">Ajouter au calendrier</button></div>
     </article>
    <div class="sep" aria-hidden="true"><span>♥</span></div>
    <article class="c">
@@ -359,7 +361,7 @@ footer p{margin:0 auto 4vh}
     <p class="time">à 16H00</p>
     <p class="place">Salle Jnane Essalam</p>
     <!-- ✏️ Remplacez par le lien exact Google Maps de la salle (Partager → Copier le lien) -->
-    <div class="btns"><a class="go" target="_blank" rel="noopener" href="https://maps.app.goo.gl/aQTzk8tvs9ccPY7M6?g_st=aw">Itinéraire</a></div>
+    <div class="btns"><a class="go" target="_blank" rel="noopener" href="https://maps.app.goo.gl/aQTzk8tvs9ccPY7M6?g_st=aw">Itinéraire</a><button class="go alt addcal" type="button" data-ev="mariage">Ajouter au calendrier</button></div>
    </article>
   </div>
  </section>
@@ -367,14 +369,6 @@ footer p{margin:0 auto 4vh}
  <section class="s">
   <h2>Le grand jour approche</h2>
   <div class="count" id="count" aria-live="off"><div><b id="d">0</b><span>jours</span></div><div><b id="h">0</b><span>heures</span></div><div><b id="m">0</b><span>minutes</span></div><div><b id="s">0</b><span>secondes</span></div></div>
-  <div class="cal">
-   <button class="go" id="calBtn" type="button" aria-expanded="false" aria-controls="calMenu">Ajouter à mon calendrier</button>
-   <div class="calmenu" id="calMenu" hidden>
-    <button type="button" data-ev="henne">Henné · 24 décembre</button>
-    <button type="button" data-ev="mariage">Mariage · 26 décembre</button>
-    <button type="button" data-ev="all" id="calAll" hidden>Les deux jours</button>
-   </div>
-  </div>
  </section>
 
  <footer>
@@ -409,17 +403,14 @@ $('openBtn').addEventListener('click',()=>{document.body.classList.add('open');s
   document.body.appendChild(g);setTimeout(()=>g.remove(),9000)}});
 
 
-/* Ajout au calendrier : iPhone/Mac -> Calendrier natif (.ics), autres -> Google Agenda */
+/* Ajout au calendrier : iPhone/Mac -> Calendrier natif, Android/autres -> appli Google Agenda */
 const EV={henne:{t:'Henné — Maria & Abderrahmane',a:'20261224T150000Z',b:'20261224T180000Z',l:'Maison familiale'},
  mariage:{t:'Mariage — Maria & Abderrahmane',a:'20261226T150000Z',b:'20261226T210000Z',l:'Salle Jnane Essalam'}};
-const apple=/iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent)&&('ontouchend' in document||/iPhone|iPad|iPod/.test(navigator.userAgent));
-if(apple)$('calAll').hidden=false;
-$('calBtn').addEventListener('click',()=>{const m=$('calMenu');m.hidden=!m.hidden;$('calBtn').setAttribute('aria-expanded',!m.hidden)});
-function ics(list){return 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Invitation//FR\r\n'+list.map(e=>`BEGIN:VEVENT\r\nUID:${e.a}@invitation\r\nDTSTAMP:20261005T000000Z\r\nDTSTART:${e.a}\r\nDTEND:${e.b}\r\nSUMMARY:${e.t}\r\nLOCATION:${e.l}\r\nBEGIN:VALARM\r\nTRIGGER:-P1D\r\nACTION:DISPLAY\r\nDESCRIPTION:Rappel\r\nEND:VALARM\r\nEND:VEVENT\r\n`).join('')+'END:VCALENDAR'}
-document.querySelectorAll('#calMenu button').forEach(b=>b.addEventListener('click',()=>{
- const k=b.dataset.ev,list=k==='all'?[EV.henne,EV.mariage]:[EV[k]];
- if(apple){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics(list)],{type:'text/calendar;charset=utf-8'}));a.download='invitation.ics';document.body.appendChild(a);a.click();a.remove()}
- else{const e=list[0];open('https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(e.t)+'&dates='+e.a+'/'+e.b+'&location='+encodeURIComponent(e.l),'_blank','noopener')}}));
+const apple=/iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent);
+document.querySelectorAll('.addcal').forEach(b=>b.addEventListener('click',()=>{const e=EV[b.dataset.ev];
+ if(apple){const ics='BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Invitation//FR\r\nBEGIN:VEVENT\r\nUID:'+e.a+'@invitation\r\nDTSTAMP:20261005T000000Z\r\nDTSTART:'+e.a+'\r\nDTEND:'+e.b+'\r\nSUMMARY:'+e.t+'\r\nLOCATION:'+e.l+'\r\nBEGIN:VALARM\r\nTRIGGER:-P1D\r\nACTION:DISPLAY\r\nDESCRIPTION:Rappel\r\nEND:VALARM\r\nEND:VEVENT\r\nEND:VCALENDAR';
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([ics],{type:'text/calendar;charset=utf-8'}));a.download=b.dataset.ev+'.ics';document.body.appendChild(a);a.click();a.remove()}
+ else location.href='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(e.t)+'&dates='+e.a+'/'+e.b+'&location='+encodeURIComponent(e.l)}));
 </script>
 </body>
 </html>
